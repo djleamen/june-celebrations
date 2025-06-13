@@ -33,14 +33,13 @@ import { queerHistoryData } from './data';
 
 const App = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true);
   const [progress, setProgress] = useState(0);
   const isMobile = useMediaQuery('(max-width:768px)');
   const isTablet = useMediaQuery('(max-width:1024px)');
 
   const currentData = queerHistoryData[currentSlide];
 
-  // Create dynamic theme based on current slide
   const theme = createTheme({
     palette: {
       mode: 'dark',
@@ -88,29 +87,32 @@ const App = () => {
     },
   });
 
-  // Animated background
   const backgroundStyle = useSpring({
     background: currentData.theme.background,
     config: { duration: 1000 },
   });
 
-  // Auto-play functionality
   useEffect(() => {
-    let interval;
-    if (isPlaying) {
-      interval = setInterval(() => {
-        setProgress((prev) => {
-          if (prev >= 100) {
-            nextSlide();
-            return 0;
-          }
-          return prev + 1;
-        });
-      }, 100);
-    } else {
+    if (!isPlaying) {
       setProgress(0);
+      return;
     }
-    return () => clearInterval(interval);
+
+    const progressInterval = setInterval(() => {
+      setProgress((prev) => (prev + 1) % 101);
+    }, 100);
+
+    return () => clearInterval(progressInterval);
+  }, [isPlaying, currentSlide]);
+
+  useEffect(() => {
+    if (!isPlaying) return;
+
+    const slideInterval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % queerHistoryData.length);
+    }, 10000);
+
+    return () => clearInterval(slideInterval);
   }, [isPlaying, currentSlide]);
 
   const nextSlide = () => {
@@ -182,7 +184,6 @@ const App = () => {
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                 <IconButton
                   onClick={prevSlide}
-                  disabled={currentSlide === 0}
                   color="primary"
                   sx={{
                     backgroundColor: 'rgba(255, 255, 255, 0.1)',
@@ -201,7 +202,6 @@ const App = () => {
                 
                 <IconButton
                   onClick={nextSlide}
-                  disabled={currentSlide === queerHistoryData.length - 1}
                   color="primary"
                   sx={{
                     backgroundColor: 'rgba(255, 255, 255, 0.1)',
