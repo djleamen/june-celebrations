@@ -15,9 +15,8 @@ const queerHistoryData = [
       "Stonewall Inn National Historic Landmark"
     ],
     theme: {
-      primary: "#e91e63",
-      secondary: "#ff4081",
-      background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)"
+      color: "#d32f2f",
+      background: "linear-gradient(135deg, #f44336 0%, #7f0000 100%)"
     }
   },
   {
@@ -36,9 +35,8 @@ const queerHistoryData = [
       "Global Medical Ethics Review"
     ],
     theme: {
-      primary: "#3f51b5",
-      secondary: "#5c6bc0",
-      background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)"
+      color: "#ef6c00",
+      background: "linear-gradient(135deg, #ff9800 0%, #6a1b09 100%)"
     }
   },
   {
@@ -57,9 +55,8 @@ const queerHistoryData = [
       "International AIDS Memorial"
     ],
     theme: {
-      primary: "#f44336",
-      secondary: "#ef5350",
-      background: "linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%)"
+      color: "#ba8e23",
+      background: "linear-gradient(135deg, #fff176 0%, #ba8e23 100%)"
     }
   },
   {
@@ -78,9 +75,8 @@ const queerHistoryData = [
       "International Commission of Jurists - Yogyakarta Principles"
     ],
     theme: {
-      primary: "#ff9800",
-      secondary: "#ffb74d",
-      background: "linear-gradient(135deg, #ffeaa7 0%, #fab1a0 100%)"
+      color: "#66bb6a",
+      background: "linear-gradient(135deg, #a5d6a7 0%, #1b5e20 100%)"
     }
   },
   {
@@ -99,9 +95,8 @@ const queerHistoryData = [
       "American Civil Liberties Union"
     ],
     theme: {
-      primary: "#2196f3",
-      secondary: "#42a5f5",
-      background: "linear-gradient(135deg, rgb(146, 185, 225) 0%, rgb(97, 131, 157) 100%)"
+      color: "#00acc1",
+      background: "linear-gradient(135deg, #00897b 0%, #00acc1 100%)"
     }
   },
   {
@@ -120,9 +115,8 @@ const queerHistoryData = [
       "Human Rights Campaign"
     ],
     theme: {
-      primary: "#9c27b0",
-      secondary: "#ba68c8",
-      background: "linear-gradient(135deg, #a29bfe 0%, #6c5ce7 100%)"
+      color: "#42a5f5",
+      background: "linear-gradient(135deg, #90caf9 0%, #0d47a1 100%)"
     }
   },
   {
@@ -141,9 +135,8 @@ const queerHistoryData = [
       "World Health Organization Archives"
     ],
     theme: {
-      primary: "#4caf50",
-      secondary: "#66bb6a",
-      background: "linear-gradient(135deg, #55efc4 0%, #81ecec 100%)"
+      color: "#5c6bc0",
+      background: "linear-gradient(135deg, #9fa8da 0%, #1a237e 100%)"
     }
   },
   {
@@ -162,9 +155,8 @@ const queerHistoryData = [
       "GLAAD Media Reference Guide"
     ],
     theme: {
-      primary: "#673ab7",
-      secondary: "#9575cd",
-      background: "linear-gradient(135deg, #a29bfe 0%, #6c5ce7 100%)"
+      color: "#ba68c8",
+      background: "linear-gradient(135deg, #e1bee7 0%, #4a148c 100%)"
     }
   },
   {
@@ -184,9 +176,8 @@ const queerHistoryData = [
       "National Center for Transgender Equality"
     ],
     theme: {
-      primary: "#ff5722",
-      secondary: "#ff7043",
-      background: "linear-gradient(135deg, #fd79a8 0%, #fdcb6e 100%)"
+      color: "#ff5722",
+      background: "linear-gradient(135deg, #fd79a8 0%, #00FF00 100%)"
     }
   }
 ];
@@ -201,14 +192,14 @@ const App = () => {
   const currentData = queerHistoryData[currentSlide];
 
   const theme = MaterialUI.createTheme({
-    palette: {
-      mode: 'dark',
-      primary: {
-        main: currentData.theme.primary,
-      },
-      secondary: {
-        main: currentData.theme.secondary,
-      },
+  palette: {
+    mode: 'dark',
+    primary: {
+      main: currentData.theme.color,
+    },
+    secondary: {
+      main: currentData.theme.color,
+    },
       background: {
         default: '#0a0a0a',
         paper: 'rgba(0, 0, 0, 0.6)',
@@ -336,6 +327,7 @@ const App = () => {
               sx: { fontWeight: 600 }
             }, '🏳️‍🌈 Queer History: A Journey Through Time'),
             
+            // Navigation Controls
             React.createElement(MaterialUI.Box, {
               sx: { display: 'flex', alignItems: 'center', gap: 1 }
             },
@@ -519,7 +511,6 @@ const App = () => {
                       variant: 'outlined',
                       clickable: true,
                       onClick: () => {
-                        // Handle special cases for proper Wikipedia redirects
                         let wikipediaPath;
                         
                         if (figure === "Lambda Legal") {

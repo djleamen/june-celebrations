@@ -45,10 +45,10 @@ const App = () => {
     palette: {
       mode: 'dark',
       primary: {
-        main: currentData.theme.primary,
+        main: currentData.theme.color,
       },
       secondary: {
-        main: currentData.theme.secondary,
+        main: currentData.theme.color,
       },
       background: {
         default: '#0a0a0a',
